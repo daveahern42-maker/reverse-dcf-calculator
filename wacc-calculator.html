@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WACC Calculator - School of Investing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:20px;min-height:100vh}.container{max-width:1200px;margin:0 auto}.header{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.header h1{font-size:42px;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.header p{font-size:18px;color:#4a5568}.info-box{background:#e6fffa;border:3px solid #319795;border-radius:16px;padding:24px;margin-bottom:24px}.info-box h2{font-size:24px;font-weight:700;color:#234e52;margin-bottom:12px}.info-box p{font-size:16px;color:#234e52;line-height:1.6;margin-bottom:8px}.formula-box{background:#1a202c;color:#fff;border-radius:16px;padding:24px;margin-bottom:24px;text-align:center}.formula-box .main{font-size:32px;font-weight:700;margin-bottom:12px}.formula-box .sub{font-size:16px;opacity:.8}.buffett-quote{background:#fef5e7;border:3px solid #f39c12;border-radius:12px;padding:20px;margin-bottom:24px;font-style:italic;color:#7d6608;text-align:center;font-size:16px}.input-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.section-header{background:#9f7aea;color:#fff;padding:16px;border-radius:12px;font-size:20px;font-weight:700;margin-bottom:20px;text-align:center}.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}.input-field{display:flex;flex-direction:column}.input-field label{font-size:14px;font-weight:600;color:#2d3748;margin-bottom:8px}.input-field label .help{font-weight:400;color:#718096;font-size:12px;display:block;margin-top:4px}.input-field input{padding:12px;font-size:16px;border:2px solid rgba(159,122,234,.3);border-radius:8px;outline:0}.input-field input:focus{border-color:#9f7aea}.calculate-btn{width:100%;padding:16px;font-size:18px;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;border-radius:12px;cursor:pointer;margin-top:32px}.calculate-btn:hover{transform:translateY(-2px)}.results-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1);display:none}.results-section.show{display:block}.key-result{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:12px;padding:32px;margin-bottom:32px;text-align:center}.key-result .label{color:rgba(255,255,255,.9);font-size:18px;margin-bottom:8px}.key-result .value{color:#fff;font-size:56px;font-weight:800}.key-result .sublabel{color:rgba(255,255,255,.9);font-size:18px;margin-top:8px}.breakdown-section{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-bottom:32px}.breakdown-card{background:#f7fafc;border:3px solid #cbd5e0;border-radius:12px;padding:24px}.breakdown-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:16px;padding:12px;border-radius:8px;text-align:center}.breakdown-card.equity h3{background:#48bb78}.breakdown-card.debt h3{background:#ed8936}.breakdown-card.wacc h3{background:#667eea}.calc-step{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:15px}.calc-step .label{flex:1;color:#4a5568;font-weight:500}.calc-step .value{font-weight:700;color:#2d3748}.calc-step .operator{font-size:20px;font-weight:700;color:#9f7aea}.subtotal{background:#fff;border-radius:8px;padding:12px;margin-top:12px;font-weight:700;display:flex;justify-content:space-between;font-size:16px;color:#2d3748}.value-creation{background:#f0fff4;border:3px solid #48bb78;border-radius:12px;padding:24px;margin-bottom:24px}.value-creation h3{font-size:22px;font-weight:700;color:#22543d;margin-bottom:16px}.value-creation-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.vc-card{background:#fff;border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px}.vc-card .icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}.vc-card .icon.creating{background:#48bb78;color:#fff}.vc-card .icon.destroying{background:#fc8181;color:#fff}.vc-card .content .label{font-size:12px;color:#4a5568;margin-bottom:4px}.vc-card .content .value{font-size:24px;font-weight:700;color:#2d3748}.insights{background:#fff5f5;border:3px solid #fc8181;border-radius:12px;padding:24px}.insights h3{font-size:22px;font-weight:700;color:#742a2a;margin-bottom:16px}.insights ul{margin:0;padding-left:24px;color:#742a2a;font-size:15px;line-height:1.8}.footer{background:#2d3748;border-radius:16px;padding:16px;text-align:center;color:#fff;font-weight:600}@media(max-width:1024px){.breakdown-section{grid-template-columns:1fr}}@media(max-width:768px){.value-creation-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>WACC Calculator</h1>
+<p>Weighted Average Cost of Capital - Your Hurdle Rate</p>
+</div>
+
+<div class="info-box">
+<h2>What is WACC?</h2>
+<p>WACC is the average rate a company pays to finance its assets, weighted by the proportion of equity and debt in its capital structure.</p>
+<p><strong>Why it matters:</strong> WACC is your hurdle rate for DCF valuations and tells you if a company creates value. If ROIC > WACC, the company creates value. If ROIC < WACC, it destroys value.</p>
+</div>
+
+<div class="formula-box">
+<div class="main">WACC = (E/V × Re) + (D/V × Rd × (1-Tc))</div>
+<div class="sub">E = Equity, D = Debt, V = Total Value, Re = Cost of Equity, Rd = Cost of Debt, Tc = Tax Rate</div>
+</div>
+
+<div class="buffett-quote">
+💡 "Risk comes from not knowing what you're doing." — Warren Buffett
+</div>
+
+<div class="input-section">
+<div class="section-header">📊 Cost of Equity (CAPM Method)</div>
+<div class="input-grid">
+<div class="input-field">
+<label>Risk-Free Rate (%)<span class="help">10-year Treasury yield (typically 3-5%)</span></label>
+<input type="number" id="riskFree" placeholder="4.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Beta<span class="help">Stock volatility vs market (find on Yahoo Finance)</span></label>
+<input type="number" id="beta" placeholder="1.2" step="0.01">
+</div>
+<div class="input-field">
+<label>Market Risk Premium (%)<span class="help">Expected market return - risk-free rate (typically 6-8%)</span></label>
+<input type="number" id="marketPremium" placeholder="7.0" step="0.1">
+</div>
+</div>
+
+<div class="section-header" style="margin-top:32px;background:#ed8936">💰 Cost of Debt</div>
+<div class="input-grid">
+<div class="input-field">
+<label>Cost of Debt (%)<span class="help">Interest rate on debt (from income statement)</span></label>
+<input type="number" id="costDebt" placeholder="5.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Tax Rate (%)<span class="help">Corporate tax rate (typically 21% in US)</span></label>
+<input type="number" id="taxRate" placeholder="21" step="0.1">
+</div>
+</div>
+
+<div class="section-header" style="margin-top:32px;background:#4299e1">🏛️ Capital Structure</div>
+<div class="input-grid">
+<div class="input-field">
+<label>Market Value of Equity ($M)<span class="help">Stock price × shares outstanding</span></label>
+<input type="number" id="equity" placeholder="1000" step="0.1">
+</div>
+<div class="input-field">
+<label>Market Value of Debt ($M)<span class="help">Total debt from balance sheet</span></label>
+<input type="number" id="debt" placeholder="250" step="0.1">
+</div>
+</div>
+
+<button class="calculate-btn" onclick="calc()">Calculate WACC</button>
+</div>
+
+<div class="results-section" id="results">
+<div class="key-result">
+<div class="label">Weighted Average Cost of Capital</div>
+<div class="value" id="wacc">--</div>
+<div class="sublabel">WACC (Discount Rate for DCF)</div>
+</div>
+
+<div class="breakdown-section">
+<div class="breakdown-card equity">
+<h3>Cost of Equity (CAPM)</h3>
+<div class="calc-step">
+<span class="label">Risk-Free Rate</span>
+<span class="value" id="rfVal">0%</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Beta × Market Premium</span>
+<span class="value" id="betaCalc">0%</span>
+</div>
+<div class="subtotal">
+<span>Cost of Equity (Re)</span>
+<span id="reVal">0%</span>
+</div>
+<div style="margin-top:16px;padding:12px;background:#e6fffa;border-radius:8px;font-size:13px;color:#234e52">
+Formula: Rf + β × (Rm - Rf)
+</div>
+</div>
+
+<div class="breakdown-card debt">
+<h3>After-Tax Cost of Debt</h3>
+<div class="calc-step">
+<span class="label">Cost of Debt</span>
+<span class="value" id="rdVal">0%</span>
+</div>
+<div class="calc-step">
+<span class="operator">×</span>
+<span class="label">(1 - Tax Rate)</span>
+<span class="value" id="taxCalc">(1 - 0%)</span>
+</div>
+<div class="subtotal">
+<span>After-Tax Cost of Debt</span>
+<span id="rdAfterTax">0%</span>
+</div>
+<div style="margin-top:16px;padding:12px;background:#fef5e7;border-radius:8px;font-size:13px;color:#7d6608">
+Tax shield makes debt cheaper than equity
+</div>
+</div>
+
+<div class="breakdown-card wacc">
+<h3>WACC Calculation</h3>
+<div class="calc-step">
+<span class="label">Equity Weight</span>
+<span class="value" id="eWeight">0%</span>
+</div>
+<div class="calc-step">
+<span class="label">Debt Weight</span>
+<span class="value" id="dWeight">0%</span>
+</div>
+<div style="margin-top:12px;border-top:2px solid #e2e8f0;padding-top:12px">
+<div class="calc-step" style="font-size:13px">
+<span class="label">E/V × Re</span>
+<span class="value" id="equityContrib">0%</span>
+</div>
+<div class="calc-step" style="font-size:13px">
+<span class="operator">+</span>
+<span class="label">D/V × Rd(1-T)</span>
+<span class="value" id="debtContrib">0%</span>
+</div>
+</div>
+<div class="subtotal">
+<span>WACC</span>
+<span id="waccVal">0%</span>
+</div>
+</div>
+</div>
+
+<div class="value-creation">
+<h3>Value Creation Check</h3>
+<p style="color:#22543d;margin-bottom:16px;font-size:14px">Compare your company's ROIC to this WACC to see if it creates value:</p>
+<div class="value-creation-grid">
+<div class="vc-card">
+<div class="icon creating">✓</div>
+<div class="content">
+<div class="label">If ROIC > WACC</div>
+<div class="value" style="color:#48bb78">Creates Value</div>
+</div>
+</div>
+<div class="vc-card">
+<div class="icon destroying">✗</div>
+<div class="content">
+<div class="label">If ROIC < WACC</div>
+<div class="value" style="color:#fc8181">Destroys Value</div>
+</div>
+</div>
+</div>
+<div style="margin-top:16px;padding:16px;background:#fff;border-radius:8px">
+<div style="font-weight:700;margin-bottom:8px;color:#2d3748">Example:</div>
+<div style="font-size:14px;color:#4a5568;line-height:1.6">
+If your WACC is <span id="exampleWACC">8.5%</span> and the company's ROIC is 15%, it creates value by earning <strong>6.5 percentage points</strong> above its cost of capital. This is what makes great companies compound!
+</div>
+</div>
+</div>
+
+<div class="insights">
+<h3>Key Insights About WACC</h3>
+<ul>
+<li><strong>Your discount rate for DCF:</strong> Use WACC to discount future cash flows</li>
+<li><strong>Hurdle rate for projects:</strong> New investments should return more than WACC</li>
+<li><strong>Compare to ROIC:</strong> Value creation happens when ROIC > WACC</li>
+<li><strong>Lower is better:</strong> Lower WACC means higher company valuation (all else equal)</li>
+<li><strong>Debt is cheaper than equity:</strong> Because of the tax shield (interest is tax-deductible)</li>
+<li><strong>But don't over-lever:</strong> Too much debt increases financial risk and can raise WACC</li>
+<li><strong>Industry matters:</strong> Stable businesses (utilities) have lower WACC than volatile ones (tech startups)</li>
+</ul>
+</div>
+</div>
+
+<div class="footer"><strong>School of Investing</strong> • Dave Ahern</div>
+</div>
+
+<script>
+function calc(){
+const rf=parseFloat(document.getElementById('riskFree').value);
+const beta=parseFloat(document.getElementById('beta').value);
+const mp=parseFloat(document.getElementById('marketPremium').value);
+const rd=parseFloat(document.getElementById('costDebt').value);
+const tax=parseFloat(document.getElementById('taxRate').value);
+const e=parseFloat(document.getElementById('equity').value);
+const d=parseFloat(document.getElementById('debt').value);
+
+if(isNaN(rf)||isNaN(beta)||isNaN(mp)||isNaN(rd)||isNaN(tax)||isNaN(e)||isNaN(d)){
+alert('Please fill in all fields');
+return;
+}
+
+const re=rf+(beta*mp);
+const rdAfterTax=rd*(1-(tax/100));
+const v=e+d;
+const eWeight=(e/v)*100;
+const dWeight=(d/v)*100;
+const equityContrib=(e/v)*re;
+const debtContrib=(d/v)*rdAfterTax;
+const wacc=equityContrib+debtContrib;
+
+document.getElementById('wacc').textContent=wacc.toFixed(2)+'%';
+document.getElementById('rfVal').textContent=rf.toFixed(1)+'%';
+document.getElementById('betaCalc').textContent=(beta*mp).toFixed(2)+'%';
+document.getElementById('reVal').textContent=re.toFixed(2)+'%';
+document.getElementById('rdVal').textContent=rd.toFixed(1)+'%';
+document.getElementById('taxCalc').textContent='(1 - '+tax.toFixed(0)+'%)';
+document.getElementById('rdAfterTax').textContent=rdAfterTax.toFixed(2)+'%';
+document.getElementById('eWeight').textContent=eWeight.toFixed(1)+'%';
+document.getElementById('dWeight').textContent=dWeight.toFixed(1)+'%';
+document.getElementById('equityContrib').textContent=equityContrib.toFixed(2)+'%';
+document.getElementById('debtContrib').textContent=debtContrib.toFixed(2)+'%';
+document.getElementById('waccVal').textContent=wacc.toFixed(2)+'%';
+document.getElementById('exampleWACC').textContent=wacc.toFixed(1)+'%';
+
+document.getElementById('results').classList.add('show');
+document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
